@@ -17,6 +17,8 @@ jobs:
           command: |
             echo "Inside the Build and push Docker image step"
             docker --version # print the version for logging
+            systemctl start docker
+            gpasswd -a $USER docker
             docker build -t sudkul/sample-express-app .        
             docker tag sample-express-app:latest sudkul/sample-express-app:1.0.0
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
